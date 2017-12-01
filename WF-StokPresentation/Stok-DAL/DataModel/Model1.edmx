@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StokDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CariHareketler">
+          <Key>
+            <PropertyRef Name="HareketID" />
+          </Key>
+          <Property Name="HareketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="IslemTuru" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CariID" Type="int" Nullable="false" />
+          <Property Name="Belge" Type="varchar" MaxLength="50" />
+          <Property Name="Borc" Type="money" Nullable="false" />
+          <Property Name="Alacak" Type="money" Nullable="false" />
+          <Property Name="UrunHareketID" Type="int" Nullable="false" />
+          <Property Name="KasaHareketID" Type="int" Nullable="false" />
+          <Property Name="Silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cariler">
+          <Key>
+            <PropertyRef Name="CariID" />
+          </Key>
+          <Property Name="CariID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CariTipi" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Unvan" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Yetkili" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="20" />
+          <Property Name="Adres" Type="varchar" MaxLength="150" />
+          <Property Name="Sehir" Type="varchar" MaxLength="50" />
+          <Property Name="VergiNo" Type="varchar" MaxLength="10" />
+          <Property Name="VergiDairesi" Type="varchar" MaxLength="50" />
+          <Property Name="ToplamBorc" Type="money" Nullable="false" />
+          <Property Name="ToplamAlacak" Type="money" Nullable="false" />
+          <Property Name="Bakiye" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="Silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KasaHareketler">
+          <Key>
+            <PropertyRef Name="HareketID" />
+          </Key>
+          <Property Name="HareketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KasaTuru" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="IslemTuru" Type="varchar" MaxLength="20" />
+          <Property Name="CariID" Type="int" Nullable="false" />
+          <Property Name="Belge" Type="varchar" MaxLength="50" />
+          <Property Name="Giren" Type="money" Nullable="false" />
+          <Property Name="Cikan" Type="money" Nullable="false" />
+          <Property Name="ParaBirimi" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriAd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Aciklama" Type="varchar(max)" />
+          <Property Name="Silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UrunHareketler">
+          <Key>
+            <PropertyRef Name="HareketID" />
+          </Key>
+          <Property Name="HareketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="IslemTuru" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CariID" Type="int" Nullable="false" />
+          <Property Name="UrunID" Type="int" Nullable="false" />
+          <Property Name="Belge" Type="varchar" MaxLength="100" />
+          <Property Name="Birim" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Adet" Type="int" Nullable="false" />
+          <Property Name="BirimFiyat" Type="money" Nullable="false" />
+          <Property Name="Tutar" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="Silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="UrunID" />
+          </Key>
+          <Property Name="UrunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunKodu" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="UrunAd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="KategoriID" Type="int" Nullable="false" />
+          <Property Name="Miktar" Type="int" Nullable="false" />
+          <Property Name="KritikSeviye" Type="int" Nullable="false" />
+          <Property Name="BirimFiyat" Type="money" Nullable="false" />
+          <Property Name="Silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CariHareketler_Cariler">
+          <End Role="Cariler" Type="Self.Cariler" Multiplicity="1" />
+          <End Role="CariHareketler" Type="Self.CariHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cariler">
+              <PropertyRef Name="CariID" />
+            </Principal>
+            <Dependent Role="CariHareketler">
+              <PropertyRef Name="CariID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KasaHareketler_Cariler">
+          <End Role="Cariler" Type="Self.Cariler" Multiplicity="1" />
+          <End Role="KasaHareketler" Type="Self.KasaHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cariler">
+              <PropertyRef Name="CariID" />
+            </Principal>
+            <Dependent Role="KasaHareketler">
+              <PropertyRef Name="CariID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UrunHareketler_Cariler">
+          <End Role="Cariler" Type="Self.Cariler" Multiplicity="1" />
+          <End Role="UrunHareketler" Type="Self.UrunHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cariler">
+              <PropertyRef Name="CariID" />
+            </Principal>
+            <Dependent Role="UrunHareketler">
+              <PropertyRef Name="CariID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UrunHareketler_Urunler">
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="1" />
+          <End Role="UrunHareketler" Type="Self.UrunHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urunler">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="UrunHareketler">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StokDataModelStoreContainer">
+          <EntitySet Name="CariHareketler" EntityType="Self.CariHareketler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cariler" EntityType="Self.Cariler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KasaHareketler" EntityType="Self.KasaHareketler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UrunHareketler" EntityType="Self.UrunHareketler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CariHareketler_Cariler" Association="Self.FK_CariHareketler_Cariler">
+            <End Role="Cariler" EntitySet="Cariler" />
+            <End Role="CariHareketler" EntitySet="CariHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KasaHareketler_Cariler" Association="Self.FK_KasaHareketler_Cariler">
+            <End Role="Cariler" EntitySet="Cariler" />
+            <End Role="KasaHareketler" EntitySet="KasaHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UrunHareketler_Cariler" Association="Self.FK_UrunHareketler_Cariler">
+            <End Role="Cariler" EntitySet="Cariler" />
+            <End Role="UrunHareketler" EntitySet="UrunHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UrunHareketler_Urunler" Association="Self.FK_UrunHareketler_Urunler">
+            <End Role="Urunler" EntitySet="Urunler" />
+            <End Role="UrunHareketler" EntitySet="UrunHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategoriler" Association="Self.FK_Urunler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StokDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CariHareketler">
+          <Key>
+            <PropertyRef Name="HareketID" />
+          </Key>
+          <Property Name="HareketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IslemTuru" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CariID" Type="Int32" Nullable="false" />
+          <Property Name="Belge" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Borc" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Alacak" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="UrunHareketID" Type="Int32" Nullable="false" />
+          <Property Name="KasaHareketID" Type="Int32" Nullable="false" />
+          <Property Name="Silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cariler" Relationship="Self.FK_CariHareketler_Cariler" FromRole="CariHareketler" ToRole="Cariler" />
+        </EntityType>
+        <EntityType Name="Cariler">
+          <Key>
+            <PropertyRef Name="CariID" />
+          </Key>
+          <Property Name="CariID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CariTipi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Unvan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Yetkili" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Sehir" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VergiNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VergiDairesi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ToplamBorc" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ToplamAlacak" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Bakiye" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CariHareketler" Relationship="Self.FK_CariHareketler_Cariler" FromRole="Cariler" ToRole="CariHareketler" />
+          <NavigationProperty Name="KasaHareketler" Relationship="Self.FK_KasaHareketler_Cariler" FromRole="Cariler" ToRole="KasaHareketler" />
+          <NavigationProperty Name="UrunHareketler" Relationship="Self.FK_UrunHareketler_Cariler" FromRole="Cariler" ToRole="UrunHareketler" />
+        </EntityType>
+        <EntityType Name="KasaHareketler">
+          <Key>
+            <PropertyRef Name="HareketID" />
+          </Key>
+          <Property Name="HareketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KasaTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IslemTuru" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CariID" Type="Int32" Nullable="false" />
+          <Property Name="Belge" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Giren" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cikan" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ParaBirimi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cariler" Relationship="Self.FK_KasaHareketler_Cariler" FromRole="KasaHareketler" ToRole="Cariler" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_Urunler_Kategoriler" FromRole="Kategoriler" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="UrunHareketler">
+          <Key>
+            <PropertyRef Name="HareketID" />
+          </Key>
+          <Property Name="HareketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IslemTuru" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CariID" Type="Int32" Nullable="false" />
+          <Property Name="UrunID" Type="Int32" Nullable="false" />
+          <Property Name="Belge" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Birim" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adet" Type="Int32" Nullable="false" />
+          <Property Name="BirimFiyat" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Tutar" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cariler" Relationship="Self.FK_UrunHareketler_Cariler" FromRole="UrunHareketler" ToRole="Cariler" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_UrunHareketler_Urunler" FromRole="UrunHareketler" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="UrunID" />
+          </Key>
+          <Property Name="UrunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunKodu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UrunAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KategoriID" Type="Int32" Nullable="false" />
+          <Property Name="Miktar" Type="Int32" Nullable="false" />
+          <Property Name="KritikSeviye" Type="Int32" Nullable="false" />
+          <Property Name="BirimFiyat" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Kategoriler" Relationship="Self.FK_Urunler_Kategoriler" FromRole="Urunler" ToRole="Kategoriler" />
+          <NavigationProperty Name="UrunHareketler" Relationship="Self.FK_UrunHareketler_Urunler" FromRole="Urunler" ToRole="UrunHareketler" />
+        </EntityType>
+        <Association Name="FK_CariHareketler_Cariler">
+          <End Role="Cariler" Type="Self.Cariler" Multiplicity="1" />
+          <End Role="CariHareketler" Type="Self.CariHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cariler">
+              <PropertyRef Name="CariID" />
+            </Principal>
+            <Dependent Role="CariHareketler">
+              <PropertyRef Name="CariID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KasaHareketler_Cariler">
+          <End Role="Cariler" Type="Self.Cariler" Multiplicity="1" />
+          <End Role="KasaHareketler" Type="Self.KasaHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cariler">
+              <PropertyRef Name="CariID" />
+            </Principal>
+            <Dependent Role="KasaHareketler">
+              <PropertyRef Name="CariID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UrunHareketler_Cariler">
+          <End Role="Cariler" Type="Self.Cariler" Multiplicity="1" />
+          <End Role="UrunHareketler" Type="Self.UrunHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cariler">
+              <PropertyRef Name="CariID" />
+            </Principal>
+            <Dependent Role="UrunHareketler">
+              <PropertyRef Name="CariID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UrunHareketler_Urunler">
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="1" />
+          <End Role="UrunHareketler" Type="Self.UrunHareketler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urunler">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="UrunHareketler">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StokDataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CariHareketler" EntityType="Self.CariHareketler" />
+          <EntitySet Name="Cariler" EntityType="Self.Cariler" />
+          <EntitySet Name="KasaHareketler" EntityType="Self.KasaHareketler" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" />
+          <EntitySet Name="UrunHareketler" EntityType="Self.UrunHareketler" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" />
+          <AssociationSet Name="FK_CariHareketler_Cariler" Association="Self.FK_CariHareketler_Cariler">
+            <End Role="Cariler" EntitySet="Cariler" />
+            <End Role="CariHareketler" EntitySet="CariHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KasaHareketler_Cariler" Association="Self.FK_KasaHareketler_Cariler">
+            <End Role="Cariler" EntitySet="Cariler" />
+            <End Role="KasaHareketler" EntitySet="KasaHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UrunHareketler_Cariler" Association="Self.FK_UrunHareketler_Cariler">
+            <End Role="Cariler" EntitySet="Cariler" />
+            <End Role="UrunHareketler" EntitySet="UrunHareketler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategoriler" Association="Self.FK_Urunler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UrunHareketler_Urunler" Association="Self.FK_UrunHareketler_Urunler">
+            <End Role="Urunler" EntitySet="Urunler" />
+            <End Role="UrunHareketler" EntitySet="UrunHareketler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StokDataModelStoreContainer" CdmEntityContainer="StokDataEntities">
+          <EntitySetMapping Name="CariHareketler">
+            <EntityTypeMapping TypeName="StokDataModel.CariHareketler">
+              <MappingFragment StoreEntitySet="CariHareketler">
+                <ScalarProperty Name="HareketID" ColumnName="HareketID" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="IslemTuru" ColumnName="IslemTuru" />
+                <ScalarProperty Name="CariID" ColumnName="CariID" />
+                <ScalarProperty Name="Belge" ColumnName="Belge" />
+                <ScalarProperty Name="Borc" ColumnName="Borc" />
+                <ScalarProperty Name="Alacak" ColumnName="Alacak" />
+                <ScalarProperty Name="UrunHareketID" ColumnName="UrunHareketID" />
+                <ScalarProperty Name="KasaHareketID" ColumnName="KasaHareketID" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cariler">
+            <EntityTypeMapping TypeName="StokDataModel.Cariler">
+              <MappingFragment StoreEntitySet="Cariler">
+                <ScalarProperty Name="CariID" ColumnName="CariID" />
+                <ScalarProperty Name="CariTipi" ColumnName="CariTipi" />
+                <ScalarProperty Name="Unvan" ColumnName="Unvan" />
+                <ScalarProperty Name="Yetkili" ColumnName="Yetkili" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+                <ScalarProperty Name="VergiNo" ColumnName="VergiNo" />
+                <ScalarProperty Name="VergiDairesi" ColumnName="VergiDairesi" />
+                <ScalarProperty Name="ToplamBorc" ColumnName="ToplamBorc" />
+                <ScalarProperty Name="ToplamAlacak" ColumnName="ToplamAlacak" />
+                <ScalarProperty Name="Bakiye" ColumnName="Bakiye" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KasaHareketler">
+            <EntityTypeMapping TypeName="StokDataModel.KasaHareketler">
+              <MappingFragment StoreEntitySet="KasaHareketler">
+                <ScalarProperty Name="HareketID" ColumnName="HareketID" />
+                <ScalarProperty Name="KasaTuru" ColumnName="KasaTuru" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="IslemTuru" ColumnName="IslemTuru" />
+                <ScalarProperty Name="CariID" ColumnName="CariID" />
+                <ScalarProperty Name="Belge" ColumnName="Belge" />
+                <ScalarProperty Name="Giren" ColumnName="Giren" />
+                <ScalarProperty Name="Cikan" ColumnName="Cikan" />
+                <ScalarProperty Name="ParaBirimi" ColumnName="ParaBirimi" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoriler">
+            <EntityTypeMapping TypeName="StokDataModel.Kategoriler">
+              <MappingFragment StoreEntitySet="Kategoriler">
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="KategoriAd" ColumnName="KategoriAd" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UrunHareketler">
+            <EntityTypeMapping TypeName="StokDataModel.UrunHareketler">
+              <MappingFragment StoreEntitySet="UrunHareketler">
+                <ScalarProperty Name="HareketID" ColumnName="HareketID" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="IslemTuru" ColumnName="IslemTuru" />
+                <ScalarProperty Name="CariID" ColumnName="CariID" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="Belge" ColumnName="Belge" />
+                <ScalarProperty Name="Birim" ColumnName="Birim" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+                <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urunler">
+            <EntityTypeMapping TypeName="StokDataModel.Urunler">
+              <MappingFragment StoreEntitySet="Urunler">
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+                <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="KritikSeviye" ColumnName="KritikSeviye" />
+                <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+                <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

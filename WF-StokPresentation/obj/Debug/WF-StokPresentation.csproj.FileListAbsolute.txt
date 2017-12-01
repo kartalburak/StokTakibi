@@ -1,0 +1,14 @@
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\bin\Debug\WF-StokPresentation.exe.config
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\bin\Debug\WF-StokPresentation.exe
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\bin\Debug\WF-StokPresentation.pdb
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\bin\Debug\EntityFramework.dll
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\bin\Debug\EntityFramework.xml
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\obj\Debug\WF_StokPresentation.Anasayfa.resources
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\obj\Debug\WF_StokPresentation.Properties.Resources.resources
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\obj\Debug\WF_StokPresentation.StokIslemleri.resources
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\obj\Debug\WF-StokPresentation.csproj.GenerateResource.Cache
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\obj\Debug\WF-StokPresentation.exe
+c:\users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\obj\Debug\WF-StokPresentation.pdb
+C:\Users\seri\documents\visual studio 2015\Projects\prjStokTakibi\WF-StokPresentation\obj\Debug\WF_StokPresentation.CariSorgulama.resources

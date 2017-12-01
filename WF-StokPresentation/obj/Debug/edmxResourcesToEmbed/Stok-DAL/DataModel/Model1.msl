@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StokDataModelStoreContainer" CdmEntityContainer="StokDataEntities">
+    <EntitySetMapping Name="CariHareketler">
+      <EntityTypeMapping TypeName="StokDataModel.CariHareketler">
+        <MappingFragment StoreEntitySet="CariHareketler">
+          <ScalarProperty Name="HareketID" ColumnName="HareketID" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="IslemTuru" ColumnName="IslemTuru" />
+          <ScalarProperty Name="CariID" ColumnName="CariID" />
+          <ScalarProperty Name="Belge" ColumnName="Belge" />
+          <ScalarProperty Name="Borc" ColumnName="Borc" />
+          <ScalarProperty Name="Alacak" ColumnName="Alacak" />
+          <ScalarProperty Name="UrunHareketID" ColumnName="UrunHareketID" />
+          <ScalarProperty Name="KasaHareketID" ColumnName="KasaHareketID" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cariler">
+      <EntityTypeMapping TypeName="StokDataModel.Cariler">
+        <MappingFragment StoreEntitySet="Cariler">
+          <ScalarProperty Name="CariID" ColumnName="CariID" />
+          <ScalarProperty Name="CariTipi" ColumnName="CariTipi" />
+          <ScalarProperty Name="Unvan" ColumnName="Unvan" />
+          <ScalarProperty Name="Yetkili" ColumnName="Yetkili" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+          <ScalarProperty Name="VergiNo" ColumnName="VergiNo" />
+          <ScalarProperty Name="VergiDairesi" ColumnName="VergiDairesi" />
+          <ScalarProperty Name="ToplamBorc" ColumnName="ToplamBorc" />
+          <ScalarProperty Name="ToplamAlacak" ColumnName="ToplamAlacak" />
+          <ScalarProperty Name="Bakiye" ColumnName="Bakiye" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KasaHareketler">
+      <EntityTypeMapping TypeName="StokDataModel.KasaHareketler">
+        <MappingFragment StoreEntitySet="KasaHareketler">
+          <ScalarProperty Name="HareketID" ColumnName="HareketID" />
+          <ScalarProperty Name="KasaTuru" ColumnName="KasaTuru" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="IslemTuru" ColumnName="IslemTuru" />
+          <ScalarProperty Name="CariID" ColumnName="CariID" />
+          <ScalarProperty Name="Belge" ColumnName="Belge" />
+          <ScalarProperty Name="Giren" ColumnName="Giren" />
+          <ScalarProperty Name="Cikan" ColumnName="Cikan" />
+          <ScalarProperty Name="ParaBirimi" ColumnName="ParaBirimi" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategoriler">
+      <EntityTypeMapping TypeName="StokDataModel.Kategoriler">
+        <MappingFragment StoreEntitySet="Kategoriler">
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+          <ScalarProperty Name="KategoriAd" ColumnName="KategoriAd" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UrunHareketler">
+      <EntityTypeMapping TypeName="StokDataModel.UrunHareketler">
+        <MappingFragment StoreEntitySet="UrunHareketler">
+          <ScalarProperty Name="HareketID" ColumnName="HareketID" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="IslemTuru" ColumnName="IslemTuru" />
+          <ScalarProperty Name="CariID" ColumnName="CariID" />
+          <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+          <ScalarProperty Name="Belge" ColumnName="Belge" />
+          <ScalarProperty Name="Birim" ColumnName="Birim" />
+          <ScalarProperty Name="Adet" ColumnName="Adet" />
+          <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+          <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Urunler">
+      <EntityTypeMapping TypeName="StokDataModel.Urunler">
+        <MappingFragment StoreEntitySet="Urunler">
+          <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+          <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+          <ScalarProperty Name="UrunAd" ColumnName="UrunAd" />
+          <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+          <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+          <ScalarProperty Name="KritikSeviye" ColumnName="KritikSeviye" />
+          <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
